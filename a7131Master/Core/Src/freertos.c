@@ -26,7 +26,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "oled.h"
+#include "a7131.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -134,18 +135,27 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartATask */
 void StartATask(void *argument)
 {
-  /* USER CODE BEGIN StartATask */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END StartATask */
+	/* USER CODE BEGIN StartATask */
+	OLED_Init();
+
+	osDelay(10);
+	oled_clear();
+	display_string(3,3,"a7131");
+	/* Infinite loop */
+	for(;;)
+	{
+
+		osDelay(10);
+		display_gra();
+		osDelay(10);
+		osDelay(100);
+	}
+	/* USER CODE END StartATask */
 }
 
 /* USER CODE BEGIN Header_StartDTask */
 /**
-* @brief Function implementing the dTask thread.
+ * @brief Function implementing the dTask thread.
 * @param argument: Not used
 * @retval None
 */
@@ -153,11 +163,12 @@ void StartATask(void *argument)
 void StartDTask(void *argument)
 {
   /* USER CODE BEGIN StartDTask */
+
   /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
+	for(;;)
+	{
+		osDelay(10);
+	}
   /* USER CODE END StartDTask */
 }
 
